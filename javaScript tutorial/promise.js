@@ -1,5 +1,5 @@
 
-const stimulator = true;
+const stimulator = false;
 function getUserList() {
     return new Promise((resolve, reject) => {
         let userList;
@@ -36,7 +36,7 @@ p.then((userList) => greetUser(userList))
     })
     .finally(() => {
         console.log("application ends here");
-    })
+    });
 
 
 
