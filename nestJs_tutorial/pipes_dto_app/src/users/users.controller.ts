@@ -8,10 +8,14 @@ import {
   Post,
   Body,
   ValidationPipe,
+  Put,
+  Patch,
+  ParamData,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { CreateDecoratorOptions } from '@nestjs/core';
-import { CreateUsersDTO } from './dtos/create-user-dto';
+import { CreateUsersDto } from './dtos/create-users-dto';
+import { UpdateUsersDto } from './dtos/update-users-dto';
+import { ParamDto } from './dtos/param-dto';
 
 @Controller('users')
 export class UsersController {
@@ -32,7 +36,23 @@ export class UsersController {
   }
 
   @Post()
-  createUser(@Body(new ValidationPipe()) createUserDto: CreateUsersDTO) {
-    console.log(createUserDto);
+  createUser(@Body() body: CreateUsersDto) {
+    console.log(body);
+    console.log(body instanceof CreateUsersDto);
+  }
+
+  @Put(':id')
+  UpdateUsers(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() body: UpdateUsersDto,
+  ) {
+    console.log(body);
+    return 'user Updated Fully';
+  }
+
+  @Patch(':id')
+  UpdateUsersPartially(@Param() id: ParamDto, @Body() body: UpdateUsersDto) {
+    console.log(body);
+    return 'user Updated Partially';
   }
 }

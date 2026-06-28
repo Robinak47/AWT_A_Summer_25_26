@@ -1,6 +1,7 @@
+import { Type } from 'class-transformer';
 import {
   IsEmail,
-  IsEmpty,
+  IsInt,
   IsNotEmpty,
   IsNumber,
   IsString,
@@ -9,33 +10,32 @@ import {
   MinLength,
 } from 'class-validator';
 
-export class CreateUsersDTO {
-  @IsNumber()
+export class CreateUsersDto {
+  @IsInt()
+  @IsNotEmpty()
+  @Type(() => Number)
   id: number;
   @IsString()
   @IsNotEmpty()
-  @MinLength(10)
+  @MinLength(3, { message: 'meow moew' })
   @MaxLength(20)
   name: string;
-  @IsEmail()
-  @IsString()
-  @IsEmpty()
-  email: string;
-  @IsString()
+  @IsInt()
   @IsNotEmpty()
-  @MinLength(1)
-  @MaxLength(6)
-  gender: string;
-  @IsNumber()
   age: number;
   @IsString()
   @IsNotEmpty()
   @MinLength(1)
   @MaxLength(6)
+  gender: string;
+  @IsEmail()
+  @IsNotEmpty()
+  email: string;
   @Matches(
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
     {
-      message: 'you have to follow the pattern',
+      message:
+        'Password must contain uppercase, lowercase, number, and special character',
     },
   )
   password: string;
