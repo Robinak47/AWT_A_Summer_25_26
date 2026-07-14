@@ -8,6 +8,7 @@ import {
 } from 'typeorm';
 import { PrimaryGeneratedColumn } from 'typeorm/browser';
 import { Passports } from '../passports/passports.entity';
+import { Posts } from 'src/posts/posts.entity';
 
 @Entity()
 export class Users {
@@ -53,4 +54,7 @@ export class Users {
 
   @OneToOne(() => Passports, (passports) => passports.users)
   passports: Passports;
+
+  @OneToMany(() => Posts, (posts) => posts.users)
+  posts: Posts[];
 }

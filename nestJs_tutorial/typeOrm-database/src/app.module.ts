@@ -5,6 +5,7 @@ import { FilesModule } from './files/files.module';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PassportsModule } from './passports/passports.module';
+import { PostsModule } from './posts/posts.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { PassportsModule } from './passports/passports.module';
       autoLoadEntities: true,
     }),
     PassportsModule,
+    PostsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
